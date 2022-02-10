@@ -15,6 +15,7 @@ function App() {
     measurementId: "G-XPB02R9NC8",
   };
   const app = initializeApp(firebaseConfig);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const analytics = getAnalytics(app);
   return (
     <div className="App">
