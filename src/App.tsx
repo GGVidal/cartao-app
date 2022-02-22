@@ -1,5 +1,4 @@
 import React, { FC } from "react";
-import logo from "./logo.svg";
 import "./App.css";
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
