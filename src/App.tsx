@@ -1,10 +1,11 @@
-import React from "react";
+import React, { FC } from "react";
 import logo from "./logo.svg";
 import "./App.css";
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
+import SignInSide from "./screens/SignInSide";
 
-function App() {
+const App: FC = () => {
   const firebaseConfig = {
     apiKey: "AIzaSyBhvRRyKPDAkvgDw4t0WtW7sELZ_03ozdo",
     authDomain: "cartaoapi-63bb1.firebaseapp.com",
@@ -19,22 +20,9 @@ function App() {
   const analytics = getAnalytics(app);
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <SignInSide />
     </div>
   );
-}
+};
 
 export default App;
