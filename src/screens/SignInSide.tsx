@@ -1,4 +1,4 @@
-import React from "react";
+import React, { FC } from "react";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -13,7 +13,10 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
-function Copyright(props: any) {
+interface copyrightProps {
+  sx: any;
+}
+const Copyright: FC<copyrightProps> = ({ sx, ...props }) => {
   return (
     <Typography
       variant="body2"
@@ -29,11 +32,11 @@ function Copyright(props: any) {
       {"."}
     </Typography>
   );
-}
+};
 
 const theme = createTheme();
 
-export default function SignInSide() {
+export const Login: FC = () => {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -137,4 +140,4 @@ export default function SignInSide() {
       </Grid>
     </ThemeProvider>
   );
-}
+};

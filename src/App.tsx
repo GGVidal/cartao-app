@@ -2,7 +2,9 @@ import React, { FC } from "react";
 import "./App.css";
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
-import SignInSide from "./screens/SignInSide";
+import { Login } from "./screens/SignInSide";
+import { CardRewards } from "./screens/CardRewards";
+import { Route, Routes } from "react-router-dom";
 
 const App: FC = () => {
   const firebaseConfig = {
@@ -18,9 +20,13 @@ const App: FC = () => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const analytics = getAnalytics(app);
   return (
-    <div className="App">
-      <SignInSide />
-    </div>
+    <>
+      <Routes>
+        <Route index element={<CardRewards />} />
+        <Route path="/rewards" element={<CardRewards />} />
+        <Route path="/login" element={<Login />} />
+      </Routes>
+    </>
   );
 };
 
