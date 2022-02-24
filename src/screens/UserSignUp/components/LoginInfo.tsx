@@ -12,32 +12,34 @@ export const LoginInfo: FC = () => {
       <Grid container spacing={3}>
         <Grid item xs={12}>
           <TextField
-            id="address2"
-            name="address2"
-            label="Address line 2"
+            id="email"
+            name="email"
+            label="E-mail"
             fullWidth
-            autoComplete="shipping address-line2"
+            autoComplete="login email"
             variant="standard"
           />
         </Grid>
         <Grid item xs={12} sm={6}>
           <TextField
             required
-            id="city"
-            name="city"
-            label="City"
+            id="user"
+            name="user"
+            label="Usuário"
             fullWidth
-            autoComplete="shipping address-level2"
+            autoComplete="login user"
             variant="standard"
           />
         </Grid>
         <Grid item xs={12} sm={6}>
           <TextField
-            id="state"
-            name="state"
-            label="State/Province/Region"
+            id="password"
+            name="password"
+            label="Senha"
             fullWidth
             variant="standard"
+            type="password"
+            autoComplete="current-password"
           />
         </Grid>
       </Grid>

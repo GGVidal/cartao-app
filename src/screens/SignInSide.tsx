@@ -128,7 +128,7 @@ export const Login: FC = () => {
                   </Link>
                 </Grid>
                 <Grid item>
-                  <Link href="#" variant="body2">
+                  <Link href="/userSignUp" variant="body2">
                     Não tem uma conta ainda? Cadastre-se
                   </Link>
                 </Grid>

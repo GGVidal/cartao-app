@@ -94,15 +94,13 @@ export const UserSignUp: FC = () => {
             ))}
           </Stepper>
           <React.Fragment>
-            {activeStep === steps.length ? (
+            {activeStep === steps.length - 1 ? (
               <React.Fragment>
                 <Typography variant="h5" gutterBottom>
-                  Thank you for your order.
+                  Conta criada com sucesso
                 </Typography>
                 <Typography variant="subtitle1">
-                  Your order number is #2001539. We have emailed your order
-                  confirmation, and will send you an update when your order has
-                  shipped.
+                  Será enviado um e-mail para confirmar sua conta
                 </Typography>
               </React.Fragment>
             ) : (
@@ -111,7 +109,7 @@ export const UserSignUp: FC = () => {
                 <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
                   {activeStep !== 0 && (
                     <Button onClick={handleBack} sx={{ mt: 3, ml: 1 }}>
-                      Back
+                      Voltar
                     </Button>
                   )}
                   <Button
@@ -119,7 +117,9 @@ export const UserSignUp: FC = () => {
                     onClick={handleNext}
                     sx={{ mt: 3, ml: 1 }}
                   >
-                    {activeStep === steps.length - 1 ? "Place order" : "Next"}
+                    {activeStep === steps.length - 2
+                      ? "Finalizar cadastro"
+                      : "Próximo"}
                   </Button>
                 </Box>
               </React.Fragment>

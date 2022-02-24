@@ -79,31 +79,21 @@ const tiers = [
 ];
 const footers = [
   {
-    title: "Company",
-    description: ["Team", "History", "Contact us", "Locations"],
-  },
-  {
-    title: "Features",
+    title: "Parceiros",
     description: [
-      "Cool stuff",
-      "Random feature",
-      "Team feature",
-      "Developer stuff",
-      "Another one",
-    ],
-  },
-  {
-    title: "Resources",
-    description: [
-      "Resource",
-      "Resource name",
-      "Another resource",
-      "Final resource",
+      {
+        name: "Cadastre-se",
+        link: "/partner",
+      },
+      { name: "Fale Conosco", link: "/" },
     ],
   },
   {
     title: "Legal",
-    description: ["Privacy policy", "Terms of use"],
+    description: [
+      { name: "Privacy policy", link: "/" },
+      { name: "Terms of use", link: "/" },
+    ],
   },
 ];
 
@@ -134,18 +124,10 @@ const CardRewards: FC = () => {
             <Link
               variant="button"
               color="text.primary"
-              href="#"
+              href="/"
               sx={{ my: 1, mx: 1.5 }}
             >
               Inicio
-            </Link>
-            <Link
-              variant="button"
-              color="text.primary"
-              href="#"
-              sx={{ my: 1, mx: 1.5 }}
-            >
-              Clube de vantagens
             </Link>
             <Link
               variant="button"
@@ -157,8 +139,15 @@ const CardRewards: FC = () => {
             </Link>
           </nav>
           <Button
+            onClick={() => navigate("/userSignUp")}
+            variant="text"
+            sx={{ my: 1, mx: 1.5 }}
+          >
+            Cadastre-se
+          </Button>
+          <Button
             onClick={() => navigate("/login")}
-            variant="outlined"
+            variant="contained"
             sx={{ my: 1, mx: 1.5 }}
           >
             Login
@@ -283,10 +272,14 @@ const CardRewards: FC = () => {
                 {footer.title}
               </Typography>
               <ul>
-                {footer.description.map((item) => (
-                  <li key={item}>
-                    <Link href="#" variant="subtitle1" color="text.secondary">
-                      {item}
+                {footer.description.map((item, index) => (
+                  <li key={index}>
+                    <Link
+                      href={item.link!}
+                      variant="subtitle1"
+                      color="text.secondary"
+                    >
+                      {item.name}
                     </Link>
                   </li>
                 ))}

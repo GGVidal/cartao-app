@@ -2,8 +2,6 @@ import React, { FC } from "react";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
 
 export const AddressForm: FC = () => {
   return (
@@ -17,7 +15,7 @@ export const AddressForm: FC = () => {
             required
             id="firstName"
             name="firstName"
-            label="First name"
+            label="Primeiro nome"
             fullWidth
             autoComplete="given-name"
             variant="standard"
@@ -28,7 +26,7 @@ export const AddressForm: FC = () => {
             required
             id="lastName"
             name="lastName"
-            label="Last name"
+            label="Ultimo nome"
             fullWidth
             autoComplete="family-name"
             variant="standard"
@@ -37,21 +35,11 @@ export const AddressForm: FC = () => {
         <Grid item xs={12}>
           <TextField
             required
-            id="address1"
-            name="address1"
-            label="Address line 1"
+            id="address"
+            name="address"
+            label="Logradouro"
             fullWidth
-            autoComplete="shipping address-line1"
-            variant="standard"
-          />
-        </Grid>
-        <Grid item xs={12}>
-          <TextField
-            id="address2"
-            name="address2"
-            label="Address line 2"
-            fullWidth
-            autoComplete="shipping address-line2"
+            autoComplete="address address"
             variant="standard"
           />
         </Grid>
@@ -60,9 +48,9 @@ export const AddressForm: FC = () => {
             required
             id="city"
             name="city"
-            label="City"
+            label="Cidade"
             fullWidth
-            autoComplete="shipping address-level2"
+            autoComplete="address city"
             variant="standard"
           />
         </Grid>
@@ -70,9 +58,10 @@ export const AddressForm: FC = () => {
           <TextField
             id="state"
             name="state"
-            label="State/Province/Region"
+            label="Estado"
             fullWidth
             variant="standard"
+            autoComplete="address state"
           />
         </Grid>
         <Grid item xs={12} sm={6}>
@@ -80,9 +69,9 @@ export const AddressForm: FC = () => {
             required
             id="zip"
             name="zip"
-            label="Zip / Postal code"
+            label="CEP"
             fullWidth
-            autoComplete="shipping postal-code"
+            autoComplete="address cep"
             variant="standard"
           />
         </Grid>
@@ -91,18 +80,20 @@ export const AddressForm: FC = () => {
             required
             id="country"
             name="country"
-            label="Country"
+            label="País"
             fullWidth
-            autoComplete="shipping country"
+            autoComplete="address pais"
             variant="standard"
           />
         </Grid>
         <Grid item xs={12}>
-          <FormControlLabel
-            control={
-              <Checkbox color="secondary" name="saveAddress" value="yes" />
-            }
-            label="Use this address for payment details"
+          <TextField
+            id="complemento"
+            name="complemento"
+            label="Complemento"
+            fullWidth
+            autoComplete="address complemento"
+            variant="standard"
           />
         </Grid>
       </Grid>
