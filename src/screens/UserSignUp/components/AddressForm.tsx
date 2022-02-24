@@ -48,8 +48,8 @@ export const AddressForm: FC = () => {
         <Grid item xs={12}>
           <TextField
             required
-            id="address"
-            name="address"
+            id="logradouro"
+            name="logradouro"
             onChange={onChange}
             label="Logradouro"
             fullWidth
@@ -84,8 +84,8 @@ export const AddressForm: FC = () => {
         <Grid item xs={12} sm={6}>
           <TextField
             required
-            id="city"
-            name="city"
+            id="cidade"
+            name="cidade"
             onChange={onChange}
             label="Cidade"
             fullWidth
@@ -95,8 +95,8 @@ export const AddressForm: FC = () => {
         </Grid>
         <Grid item xs={12} sm={6}>
           <TextField
-            id="state"
-            name="state"
+            id="estado"
+            name="estado"
             onChange={onChange}
             required
             label="Estado"
@@ -108,8 +108,8 @@ export const AddressForm: FC = () => {
         <Grid item xs={12} sm={6}>
           <TextField
             required
-            id="zip"
-            name="zip"
+            id="cep"
+            name="CEP"
             onChange={onChange}
             label="CEP"
             fullWidth

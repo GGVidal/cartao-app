@@ -18,6 +18,7 @@ import { LoginInfo } from "./components/LoginInfo";
 
 import { userState } from "../../recoilAtoms/atoms";
 import { useRecoilValue } from "recoil";
+import { api } from "../../server";
 
 const Copyright: FC = () => {
   return (
@@ -65,18 +66,46 @@ export const UserSignUp: FC = () => {
     setActiveStep(activeStep - 1);
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     const auth = getAuth();
     console.log("GG AUTH", auth);
-    const { email, password } = userInfo;
-    if (Boolean(email) && Boolean(password)) {
-      createUserWithEmailAndPassword(auth, email, password)
-        .then((userCredential) => {
-          console.log("SIGN UP SUCESSFULL", userCredential);
-        })
-        .catch((error) => {
-          console.log("GG ERROR", error);
+    const {
+      email,
+      senha,
+      CEP,
+      cidade,
+      complemento,
+      estado,
+      numero,
+      bairro,
+      firstName,
+      lastName,
+      login,
+      logradouro,
+    } = userInfo;
+    console.log(email, senha);
+    if (Boolean(email) && Boolean(senha)) {
+      try {
+        // const authUser = await createUserWithEmailAndPassword(
+        //   auth,
+        //   email,
+        //   senha
+        // );
+        // if (authUser) {
+        const res = await api.post("/endereco", {
+          logradouro,
+          bairro,
+          numero,
+          CEP,
+          cidade,
+          estado,
+          complemento,
         });
+        console.log(res);
+        // }
+      } catch (err) {
+        console.log(err);
+      }
     }
   };
 

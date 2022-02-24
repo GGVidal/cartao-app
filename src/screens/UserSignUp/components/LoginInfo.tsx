@@ -41,8 +41,8 @@ export const LoginInfo: FC = () => {
         <Grid item xs={12} sm={6}>
           <TextField
             required
-            id="user"
-            name="user"
+            id="login"
+            name="login"
             onChange={onChange}
             label="Usuário"
             fullWidth
@@ -54,7 +54,7 @@ export const LoginInfo: FC = () => {
           <InputLabel htmlFor="standard-adornment-password">Senha</InputLabel>
           <Input
             id="standard-adornment-password"
-            name="password"
+            name="senha"
             endAdornment={
               <InputAdornment position="end">
                 <IconButton

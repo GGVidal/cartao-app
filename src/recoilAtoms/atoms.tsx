@@ -2,16 +2,18 @@ import { atom } from "recoil";
 
 interface userProps {
   email: string;
-  user: string;
-  password: string;
+  login: string;
+  senha: string;
   firstName: string;
   lastName: string;
-  address: string;
-  city: string;
-  state: string;
-  zip: string;
+  logradouro: string;
+  cidade: string;
+  estado: string;
+  CEP: string;
   country: string;
-  complement: string;
+  complemento: string;
+  numero: string;
+  bairro: string;
 }
 
 export const userState = atom({
