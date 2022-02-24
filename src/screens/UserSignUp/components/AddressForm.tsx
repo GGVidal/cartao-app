@@ -2,17 +2,29 @@ import React, { FC } from "react";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
+import { userState } from "../../../recoilAtoms/atoms";
+import { useRecoilState } from "recoil";
 
 export const AddressForm: FC = () => {
+  const [userInfo, setUserInfo] = useRecoilState(userState);
+
+  const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = event.target;
+    setUserInfo({ ...userInfo, [name]: value });
+  };
+
   return (
     <React.Fragment>
       <Typography variant="h6" gutterBottom>
         Informações
       </Typography>
+      {console.log("GG", userInfo)}
+
       <Grid container spacing={3}>
         <Grid item xs={12} sm={6}>
           <TextField
             required
+            onChange={onChange}
             id="firstName"
             name="firstName"
             label="Primeiro nome"
@@ -26,6 +38,7 @@ export const AddressForm: FC = () => {
             required
             id="lastName"
             name="lastName"
+            onChange={onChange}
             label="Ultimo nome"
             fullWidth
             autoComplete="family-name"
@@ -37,6 +50,7 @@ export const AddressForm: FC = () => {
             required
             id="address"
             name="address"
+            onChange={onChange}
             label="Logradouro"
             fullWidth
             autoComplete="address address"
@@ -48,6 +62,7 @@ export const AddressForm: FC = () => {
             required
             id="city"
             name="city"
+            onChange={onChange}
             label="Cidade"
             fullWidth
             autoComplete="address city"
@@ -58,6 +73,7 @@ export const AddressForm: FC = () => {
           <TextField
             id="state"
             name="state"
+            onChange={onChange}
             label="Estado"
             fullWidth
             variant="standard"
@@ -69,6 +85,7 @@ export const AddressForm: FC = () => {
             required
             id="zip"
             name="zip"
+            onChange={onChange}
             label="CEP"
             fullWidth
             autoComplete="address cep"
@@ -80,6 +97,7 @@ export const AddressForm: FC = () => {
             required
             id="country"
             name="country"
+            onChange={onChange}
             label="País"
             fullWidth
             autoComplete="address pais"
@@ -90,6 +108,7 @@ export const AddressForm: FC = () => {
           <TextField
             id="complemento"
             name="complemento"
+            onChange={onChange}
             label="Complemento"
             fullWidth
             autoComplete="address complemento"

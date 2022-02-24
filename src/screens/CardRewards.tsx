@@ -82,7 +82,7 @@ const footers = [
     title: "Parceiros",
     description: [
       {
-        name: "Cadastre-se",
+        name: "Torne-se um parceiro",
         link: "/partnerSignUp",
       },
       { name: "Fale Conosco", link: "/" },
