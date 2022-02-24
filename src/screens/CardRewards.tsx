@@ -83,7 +83,7 @@ const footers = [
     description: [
       {
         name: "Cadastre-se",
-        link: "/partner",
+        link: "/partnerSignUp",
       },
       { name: "Fale Conosco", link: "/" },
     ],

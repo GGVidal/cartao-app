@@ -2,7 +2,7 @@ import React, { FC } from "react";
 import "./App.css";
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
-import { CardRewards, UserSignUp, Login } from "./screens";
+import { CardRewards, UserSignUp, Login, PartnerSignUp } from "./screens";
 import { Route, Routes } from "react-router-dom";
 
 const App: FC = () => {
@@ -25,6 +25,7 @@ const App: FC = () => {
         <Route path="/rewards" element={<CardRewards />} />
         <Route path="/login" element={<Login />} />
         <Route path="/userSignUp" element={<UserSignUp />} />
+        <Route path="/partnerSignUp" element={<PartnerSignUp />} />
       </Routes>
     </>
   );
