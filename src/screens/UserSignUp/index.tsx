@@ -1,5 +1,6 @@
 import React, { FC } from "react";
 import CssBaseline from "@mui/material/CssBaseline";
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
@@ -14,6 +15,9 @@ import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { AddressForm } from "./components/AddressForm";
 import { LoginInfo } from "./components/LoginInfo";
+
+import { userState } from "../../recoilAtoms/atoms";
+import { useRecoilValue } from "recoil";
 
 const Copyright: FC = () => {
   return (
@@ -51,6 +55,7 @@ const theme = createTheme();
 
 export const UserSignUp: FC = () => {
   const [activeStep, setActiveStep] = React.useState(0);
+  const userInfo = useRecoilValue(userState);
 
   const handleNext = () => {
     setActiveStep(activeStep + 1);
@@ -58,6 +63,30 @@ export const UserSignUp: FC = () => {
 
   const handleBack = () => {
     setActiveStep(activeStep - 1);
+  };
+
+  const handleSubmit = () => {
+    const auth = getAuth();
+    console.log("GG AUTH", auth);
+    const { email, password } = userInfo;
+    if (Boolean(email) && Boolean(password)) {
+      createUserWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+          console.log("SIGN UP SUCESSFULL", userCredential);
+        })
+        .catch((error) => {
+          console.log("GG ERROR", error);
+        });
+    }
+  };
+
+  const handleClick = () => {
+    if (activeStep === steps.length - 2) {
+      handleNext();
+      handleSubmit();
+      return;
+    }
+    handleNext();
   };
 
   return (
@@ -114,7 +143,7 @@ export const UserSignUp: FC = () => {
                   )}
                   <Button
                     variant="contained"
-                    onClick={handleNext}
+                    onClick={handleClick}
                     sx={{ mt: 3, ml: 1 }}
                   >
                     {activeStep === steps.length - 2

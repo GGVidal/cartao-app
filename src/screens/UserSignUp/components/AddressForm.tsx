@@ -60,6 +60,30 @@ export const AddressForm: FC = () => {
         <Grid item xs={12} sm={6}>
           <TextField
             required
+            id="bairro"
+            name="bairro"
+            onChange={onChange}
+            label="Bairro"
+            fullWidth
+            autoComplete="address address"
+            variant="standard"
+          />
+        </Grid>
+        <Grid item xs={12} sm={6}>
+          <TextField
+            required
+            id="numero"
+            name="numero"
+            onChange={onChange}
+            label="Número"
+            fullWidth
+            autoComplete="address address"
+            variant="standard"
+          />
+        </Grid>
+        <Grid item xs={12} sm={6}>
+          <TextField
+            required
             id="city"
             name="city"
             onChange={onChange}
@@ -74,6 +98,7 @@ export const AddressForm: FC = () => {
             id="state"
             name="state"
             onChange={onChange}
+            required
             label="Estado"
             fullWidth
             variant="standard"

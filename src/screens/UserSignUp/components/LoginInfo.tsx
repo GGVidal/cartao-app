@@ -15,6 +15,7 @@ import { useRecoilState } from "recoil";
 export const LoginInfo: FC = () => {
   const [userInfo, setUserInfo] = useRecoilState(userState);
   const [showPassword, setShowPassword] = useState<boolean>(false);
+
   const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     setUserInfo({ ...userInfo, [name]: value });
