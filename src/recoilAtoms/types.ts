@@ -25,6 +25,7 @@ export interface partnerProps {
   logradouro: string;
   cidade: string;
   estado: string;
+  CEP: string;
   country: string;
   complemento: string;
   numero: string;

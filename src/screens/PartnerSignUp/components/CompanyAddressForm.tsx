@@ -13,31 +13,42 @@ export const CompanyAddressForm: FC = () => {
         <Grid item xs={12}>
           <TextField
             required
-            id="companyName"
-            name="companyName"
+            id="nome_empresa"
+            name="nome_empresa"
             label="Nome da Empresa"
             fullWidth
-            autoComplete="given-name"
+            autoComplete="company-name"
             variant="standard"
           />
         </Grid>
         <Grid item xs={12}>
           <TextField
             required
-            id="managerName"
-            name="managerName"
+            id="nome_resp"
+            name="nome_resp"
             label="Nome do responsável"
+            fullWidth
+            autoComplete="resp-name"
+            variant="standard"
+          />
+        </Grid>
+        <Grid item xs={12} sm={6}>
+          <TextField
+            required
+            id="servicos"
+            name="servicos"
+            label="Serviços oferecidos"
             fullWidth
             autoComplete="family-name"
             variant="standard"
           />
         </Grid>
-        <Grid item xs={12}>
+        <Grid item xs={12} sm={6}>
           <TextField
             required
-            id="services"
-            name="services"
-            label="Serviços oferecidos"
+            id="telefone"
+            name="telefone"
+            label="Telefone"
             fullWidth
             autoComplete="family-name"
             variant="standard"
@@ -57,8 +68,8 @@ export const CompanyAddressForm: FC = () => {
         <Grid item xs={12} sm={6}>
           <TextField
             required
-            id="openingHours"
-            name="openingHours"
+            id="horario_funcionamento"
+            name="horario_funcionamento"
             label="Horário de funcionamento"
             fullWidth
             autoComplete="family-name"
@@ -68,8 +79,8 @@ export const CompanyAddressForm: FC = () => {
         <Grid item xs={12}>
           <TextField
             required
-            id="address"
-            name="address"
+            id="logradouro"
+            name="logradouro"
             label="Logradouro"
             fullWidth
             autoComplete="address address"
@@ -79,8 +90,30 @@ export const CompanyAddressForm: FC = () => {
         <Grid item xs={12} sm={6}>
           <TextField
             required
-            id="city"
-            name="city"
+            id="bairro"
+            name="bairro"
+            label="Bairro"
+            fullWidth
+            autoComplete="address city"
+            variant="standard"
+          />
+        </Grid>
+        <Grid item xs={12} sm={6}>
+          <TextField
+            required
+            id="numero"
+            name="numero"
+            label="Numero"
+            fullWidth
+            autoComplete="address city"
+            variant="standard"
+          />
+        </Grid>
+        <Grid item xs={12} sm={6}>
+          <TextField
+            required
+            id="cidade"
+            name="cidade"
             label="Cidade"
             fullWidth
             autoComplete="address city"
@@ -89,8 +122,8 @@ export const CompanyAddressForm: FC = () => {
         </Grid>
         <Grid item xs={12} sm={6}>
           <TextField
-            id="state"
-            name="state"
+            id="estado"
+            name="estado"
             label="Estado"
             fullWidth
             variant="standard"
@@ -100,8 +133,8 @@ export const CompanyAddressForm: FC = () => {
         <Grid item xs={12} sm={6}>
           <TextField
             required
-            id="zip"
-            name="zip"
+            id="CEP"
+            name="CEP"
             label="CEP"
             fullWidth
             autoComplete="address cep"
