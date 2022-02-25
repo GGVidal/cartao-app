@@ -14,6 +14,8 @@ interface userProps {
   complemento: string;
   numero: string;
   bairro: string;
+  cpf: string;
+  telefone: string;
 }
 
 export const userState = atom({

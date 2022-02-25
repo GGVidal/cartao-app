@@ -4,11 +4,24 @@ import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
 import { userState } from "../../../recoilAtoms/atoms";
 import { useRecoilState } from "recoil";
+import {
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Select,
+  SelectChangeEvent,
+} from "@mui/material";
+import { BRAZIL_UF } from "../../../constants/brazilUF";
 
 export const AddressForm: FC = () => {
   const [userInfo, setUserInfo] = useRecoilState(userState);
 
   const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = event.target;
+    setUserInfo({ ...userInfo, [name]: value });
+  };
+
+  const onChangeSelect = (event: SelectChangeEvent<string>) => {
     const { name, value } = event.target;
     setUserInfo({ ...userInfo, [name]: value });
   };
@@ -42,6 +55,30 @@ export const AddressForm: FC = () => {
             label="Ultimo nome"
             fullWidth
             autoComplete="family-name"
+            variant="standard"
+          />
+        </Grid>
+        <Grid item xs={12} sm={6}>
+          <TextField
+            required
+            id="cpf"
+            name="cpf"
+            onChange={onChange}
+            label="CPF"
+            fullWidth
+            autoComplete="address address"
+            variant="standard"
+          />
+        </Grid>
+        <Grid item xs={12} sm={6}>
+          <TextField
+            required
+            id="telefone"
+            name="telefone"
+            onChange={onChange}
+            label="Telefone"
+            fullWidth
+            autoComplete="phone"
             variant="standard"
           />
         </Grid>
@@ -93,18 +130,19 @@ export const AddressForm: FC = () => {
             variant="standard"
           />
         </Grid>
-        <Grid item xs={12} sm={6}>
-          <TextField
+        <FormControl variant="standard" sx={{ mt: 3, ml: 3, minWidth: 120 }}>
+          <InputLabel id="UF">UF</InputLabel>
+          <Select
+            labelId="UF"
             id="estado"
             name="estado"
-            onChange={onChange}
-            required
-            label="Estado"
-            fullWidth
-            variant="standard"
-            autoComplete="address state"
-          />
-        </Grid>
+            onChange={onChangeSelect}
+          >
+            {BRAZIL_UF.map((value) => {
+              return <MenuItem value={value}>{value}</MenuItem>;
+            })}
+          </Select>
+        </FormControl>
         <Grid item xs={12} sm={6}>
           <TextField
             required

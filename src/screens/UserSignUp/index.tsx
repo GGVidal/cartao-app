@@ -1,4 +1,5 @@
 import React, { FC } from "react";
+import { v4 } from "uuid";
 import CssBaseline from "@mui/material/CssBaseline";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import AppBar from "@mui/material/AppBar";
@@ -78,31 +79,48 @@ export const UserSignUp: FC = () => {
       estado,
       numero,
       bairro,
+      cpf,
       firstName,
       lastName,
       login,
       logradouro,
+      telefone,
     } = userInfo;
     console.log(email, senha);
     if (Boolean(email) && Boolean(senha)) {
       try {
-        // const authUser = await createUserWithEmailAndPassword(
-        //   auth,
-        //   email,
-        //   senha
-        // );
-        // if (authUser) {
-        const res = await api.post("/endereco", {
-          logradouro,
-          bairro,
-          numero,
-          CEP,
-          cidade,
-          estado,
-          complemento,
-        });
-        console.log(res);
-        // }
+        const authUser = await createUserWithEmailAndPassword(
+          auth,
+          email,
+          senha
+        );
+        const { user } = authUser;
+        if (user) {
+          const res = await api.post("/endereco", {
+            logradouro,
+            bairro,
+            numero,
+            CEP,
+            cidade,
+            estado,
+            complemento,
+          });
+          const { data } = res;
+          const uuid = v4();
+          const userRes = await api.post("/usuario", {
+            nome: `${firstName} ${lastName}`,
+            email,
+            senha,
+            login,
+            cpf,
+            tipo_usuario_id: 2,
+            uuid,
+            endereco_id: data.id,
+            telefone,
+          });
+
+          console.log(res, userRes);
+        }
       } catch (err) {
         console.log(err);
       }
