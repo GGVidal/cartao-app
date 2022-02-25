@@ -7,9 +7,15 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Link from "@mui/material/Link";
 import Button from "@mui/material/Button";
+import { useRecoilValue, useResetRecoilState } from "recoil";
+import { userLoggedState } from "../recoilAtoms/atoms";
 
 export const Header: FC = () => {
+  const userLogged = useRecoilValue(userLoggedState);
   const navigate = useNavigate();
+
+  const logout = useResetRecoilState(userLoggedState);
+
   return (
     <React.Fragment>
       <GlobalStyles
@@ -49,20 +55,37 @@ export const Header: FC = () => {
               Suporte
             </Link>
           </nav>
-          <Button
-            onClick={() => navigate("/userSignUp")}
-            variant="text"
-            sx={{ my: 1, mx: 1.5 }}
-          >
-            Cadastre-se
-          </Button>
-          <Button
-            onClick={() => navigate("/login")}
-            variant="contained"
-            sx={{ my: 1, mx: 1.5 }}
-          >
-            Login
-          </Button>
+          {userLogged.token ? (
+            <>
+              <Button
+                onClick={() => navigate("/login")}
+                variant="contained"
+                sx={{ my: 1, mx: 1.5 }}
+              >
+                {userLogged.login}
+              </Button>
+              <Button onClick={logout} variant="text" sx={{ my: 1, mx: 1.5 }}>
+                Sair
+              </Button>
+            </>
+          ) : (
+            <>
+              <Button
+                onClick={() => navigate("/userSignUp")}
+                variant="text"
+                sx={{ my: 1, mx: 1.5 }}
+              >
+                Cadastre-se
+              </Button>
+              <Button
+                onClick={() => navigate("/login")}
+                variant="contained"
+                sx={{ my: 1, mx: 1.5 }}
+              >
+                Login
+              </Button>
+            </>
+          )}
         </Toolbar>
       </AppBar>
     </React.Fragment>

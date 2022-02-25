@@ -2,6 +2,7 @@ import React, { FC } from "react";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
+import { useNavigate } from "react-router-dom";
 import TextField from "@mui/material/TextField";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
@@ -12,6 +13,9 @@ import Grid from "@mui/material/Grid";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { api } from "../server/index";
+import { useRecoilState } from "recoil";
+import { userLoggedState } from "../recoilAtoms/atoms";
 
 interface copyrightProps {
   sx: any;
@@ -37,20 +41,37 @@ const Copyright: FC<copyrightProps> = ({ sx, ...props }) => {
 const theme = createTheme();
 
 export const Login: FC = () => {
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const [userLogged, setUserLogged] = useRecoilState(userLoggedState);
+  const navigate = useNavigate();
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     // eslint-disable-next-line no-console
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
+    const email = data.get("email");
+    const senha = data.get("senha");
+    if (!!email && !!senha) {
+      const res = await api.post("/sessao", {
+        email,
+        senha,
+      });
+      if (res.status === 200) {
+        const { data } = res;
+        const { token, user } = data;
+        const { email, login } = user;
+        setUserLogged({ ...userLogged, token, email, login });
+        api.defaults.headers.common["authorization"] = token;
+        navigate("/");
+      }
+      console.log("GG RES", res);
+    }
   };
 
   return (
     <ThemeProvider theme={theme}>
       <Grid container component="main" sx={{ height: "100vh" }}>
         <CssBaseline />
+        {console.log(userLogged)}
         <Grid
           item
           xs={false}
@@ -103,10 +124,10 @@ export const Login: FC = () => {
                 margin="normal"
                 required
                 fullWidth
-                name="password"
+                name="senha"
                 label="Senha"
                 type="password"
-                id="password"
+                id="senha"
                 autoComplete="current-password"
               />
               <FormControlLabel

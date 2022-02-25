@@ -35,3 +35,9 @@ export interface partnerProps {
   login: string;
   senha: string;
 }
+
+export interface userLoggedProps {
+  login: string;
+  email: string;
+  token: string;
+}
