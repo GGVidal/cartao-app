@@ -1,11 +1,8 @@
 import React, { FC } from "react";
 import { v4 } from "uuid";
-import CssBaseline from "@mui/material/CssBaseline";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
-import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
-import Toolbar from "@mui/material/Toolbar";
 import Paper from "@mui/material/Paper";
 import Stepper from "@mui/material/Stepper";
 import Step from "@mui/material/Step";
@@ -86,7 +83,6 @@ export const UserSignUp: FC = () => {
       logradouro,
       telefone,
     } = userInfo;
-    console.log(email, senha);
     if (Boolean(email) && Boolean(senha)) {
       try {
         const authUser = await createUserWithEmailAndPassword(
@@ -118,11 +114,12 @@ export const UserSignUp: FC = () => {
             endereco_id: data.id,
             telefone,
           });
-
-          console.log(res, userRes);
+          if (userRes.status === 200) {
+            console.log("Usuário cadastrado com sucesso");
+          }
         }
       } catch (err) {
-        console.log(err);
+        console.log("ERROR", err);
       }
     }
   };
@@ -138,22 +135,6 @@ export const UserSignUp: FC = () => {
 
   return (
     <ThemeProvider theme={theme}>
-      <CssBaseline />
-      <AppBar
-        position="absolute"
-        color="default"
-        elevation={0}
-        sx={{
-          position: "relative",
-          borderBottom: (t) => `1px solid ${t.palette.divider}`,
-        }}
-      >
-        <Toolbar>
-          <Typography variant="h6" color="inherit" noWrap>
-            Company name
-          </Typography>
-        </Toolbar>
-      </AppBar>
       <Container component="main" maxWidth="sm" sx={{ mb: 4 }}>
         <Paper
           variant="outlined"

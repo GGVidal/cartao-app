@@ -5,6 +5,7 @@ import { getAnalytics } from "firebase/analytics";
 import { CardRewards, UserSignUp, Login, PartnerSignUp } from "./screens";
 import { Route, Routes } from "react-router-dom";
 import { RecoilRoot } from "recoil";
+import { Header } from "./components";
 
 const App: FC = () => {
   const firebaseConfig = {
@@ -22,6 +23,7 @@ const App: FC = () => {
   return (
     <>
       <RecoilRoot>
+        <Header />
         <Routes>
           <Route index element={<CardRewards />} />
           <Route path="/rewards" element={<CardRewards />} />

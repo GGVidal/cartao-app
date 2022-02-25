@@ -1,19 +1,14 @@
 import React, { FC } from "react";
-import { useNavigate } from "react-router-dom";
-import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import CardHeader from "@mui/material/CardHeader";
-import CssBaseline from "@mui/material/CssBaseline";
 import Grid from "@mui/material/Grid";
 import StarIcon from "@mui/icons-material/StarBorder";
-import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Link from "@mui/material/Link";
-import GlobalStyles from "@mui/material/GlobalStyles";
 import Container from "@mui/material/Container";
 
 interface copyrightProps {
@@ -98,63 +93,8 @@ const footers = [
 ];
 
 const CardRewards: FC = () => {
-  const navigate = useNavigate();
   return (
     <React.Fragment>
-      <GlobalStyles
-        styles={{ ul: { margin: 0, padding: 0, listStyle: "none" } }}
-      />
-      <CssBaseline />
-      <AppBar
-        position="static"
-        color="default"
-        elevation={0}
-        sx={{ borderBottom: (theme) => `1px solid ${theme.palette.divider}` }}
-      >
-        <Toolbar sx={{ flexWrap: "wrap" }}>
-          <Typography
-            variant="h6"
-            color="inherit"
-            noWrap
-            sx={{ flexGrow: 1, marginRight: 120 }}
-          >
-            Cartão Seraphis
-          </Typography>
-          <nav>
-            <Link
-              variant="button"
-              color="text.primary"
-              href="/"
-              sx={{ my: 1, mx: 1.5 }}
-            >
-              Inicio
-            </Link>
-            <Link
-              variant="button"
-              color="text.primary"
-              href="#"
-              sx={{ my: 1, mx: 1.5 }}
-            >
-              Suporte
-            </Link>
-          </nav>
-          <Button
-            onClick={() => navigate("/userSignUp")}
-            variant="text"
-            sx={{ my: 1, mx: 1.5 }}
-          >
-            Cadastre-se
-          </Button>
-          <Button
-            onClick={() => navigate("/login")}
-            variant="contained"
-            sx={{ my: 1, mx: 1.5 }}
-          >
-            Login
-          </Button>
-        </Toolbar>
-      </AppBar>
-      {/* Hero unit */}
       <Container
         disableGutters
         maxWidth="sm"
@@ -185,7 +125,6 @@ const CardRewards: FC = () => {
       <Container maxWidth="md" component="main">
         <Grid container spacing={5} alignItems="flex-end">
           {tiers.map((tier) => (
-            // Enterprise card is full width at sm breakpoint
             <Grid
               item
               key={tier.title}
