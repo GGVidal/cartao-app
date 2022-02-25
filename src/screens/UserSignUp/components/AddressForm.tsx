@@ -138,8 +138,12 @@ export const AddressForm: FC = () => {
             name="estado"
             onChange={onChangeSelect}
           >
-            {BRAZIL_UF.map((value) => {
-              return <MenuItem value={value}>{value}</MenuItem>;
+            {BRAZIL_UF.map((value, index) => {
+              return (
+                <MenuItem key={index} value={value}>
+                  {value}
+                </MenuItem>
+              );
             })}
           </Select>
         </FormControl>

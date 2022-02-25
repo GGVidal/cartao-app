@@ -2,6 +2,7 @@ import React, { FC } from "react";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import Paper from "@mui/material/Paper";
+import { collection, addDoc, getFirestore } from "firebase/firestore";
 import Stepper from "@mui/material/Stepper";
 import Step from "@mui/material/Step";
 import StepLabel from "@mui/material/StepLabel";
@@ -11,6 +12,8 @@ import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { CompanyAddressForm } from "./components/CompanyAddressForm";
 import { CompanyLoginInfo } from "./components/CompanyLoginInfo";
+import { partnerUserState } from "../../recoilAtoms/atoms";
+import { useRecoilValue } from "recoil";
 
 const Copyright: FC = () => {
   return (
@@ -48,6 +51,7 @@ const theme = createTheme();
 
 export const PartnerSignUp: FC = () => {
   const [activeStep, setActiveStep] = React.useState(0);
+  const partnerInfo = useRecoilValue(partnerUserState);
 
   const handleNext = () => {
     setActiveStep(activeStep + 1);
@@ -57,6 +61,61 @@ export const PartnerSignUp: FC = () => {
     setActiveStep(activeStep - 1);
   };
 
+  const handleSubmit = async () => {
+    const db = getFirestore();
+    const {
+      CEP,
+      telefone,
+      cidade,
+      email,
+      estado,
+      login,
+      nome_empresa,
+      logradouro,
+      senha,
+      bairro,
+      cnpj,
+      complemento,
+      horario_funcionamento,
+      nome_resp,
+      numero,
+      servicos,
+    } = partnerInfo;
+    if (Boolean(email) && Boolean(senha)) {
+      try {
+        const docRef = await addDoc(collection(db, "Pre_Approve_Partner"), {
+          CEP,
+          telefone,
+          cidade,
+          email,
+          estado,
+          login,
+          nome_empresa,
+          logradouro,
+          senha,
+          bairro,
+          cnpj,
+          complemento,
+          horario_funcionamento,
+          nome_resp,
+          numero,
+          servicos,
+        });
+        console.log("Document written with ID: ", docRef.id);
+      } catch (err) {
+        console.error("Error adding document: ", err);
+      }
+    }
+  };
+
+  const handleClick = () => {
+    if (activeStep === steps.length - 2) {
+      handleNext();
+      handleSubmit();
+      return;
+    }
+    handleNext();
+  };
   return (
     <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="sm" sx={{ mb: 4 }}>
@@ -96,7 +155,7 @@ export const PartnerSignUp: FC = () => {
                   )}
                   <Button
                     variant="contained"
-                    onClick={handleNext}
+                    onClick={handleClick}
                     sx={{ mt: 3, ml: 1 }}
                   >
                     {activeStep === steps.length - 2

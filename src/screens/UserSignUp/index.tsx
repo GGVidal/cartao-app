@@ -101,21 +101,23 @@ export const UserSignUp: FC = () => {
             estado,
             complemento,
           });
-          const { data } = res;
-          const uuid = v4();
-          const userRes = await api.post("/usuario", {
-            nome: `${firstName} ${lastName}`,
-            email,
-            senha,
-            login,
-            cpf,
-            tipo_usuario_id: 2,
-            uuid,
-            endereco_id: data.id,
-            telefone,
-          });
-          if (userRes.status === 200) {
-            console.log("Usuário cadastrado com sucesso");
+          if (res.status === 200) {
+            const { data } = res;
+            const uuid = v4();
+            const userRes = await api.post("/usuario", {
+              nome: `${firstName} ${lastName}`,
+              email,
+              senha,
+              login,
+              cpf,
+              tipo_usuario_id: 2,
+              uuid,
+              endereco_id: data.id,
+              telefone,
+            });
+            if (userRes.status === 200) {
+              console.log("Usuário cadastrado com sucesso");
+            }
           }
         }
       } catch (err) {
