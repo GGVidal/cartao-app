@@ -40,4 +40,12 @@ export interface userLoggedProps {
   login: string;
   email: string;
   token: string;
+  cpf: string;
+  endereco_id: number;
+  nome: string;
+  num_registro: string;
+  telefone: string;
+  parceiro_id: number;
+  beneficio_id: number;
+  tipo_usuario_id: number;
 }

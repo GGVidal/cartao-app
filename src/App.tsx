@@ -2,7 +2,15 @@ import React, { FC } from "react";
 import "./App.css";
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
-import { CardRewards, UserSignUp, Login, PartnerSignUp } from "./screens";
+import {
+  CardRewards,
+  UserSignUp,
+  Login,
+  PartnerSignUp,
+  SignInAdmin,
+  DashboardContent,
+  PartnerRequests,
+} from "./screens";
 import { Route, Routes } from "react-router-dom";
 import { RecoilRoot } from "recoil";
 import { Header } from "./components";
@@ -30,6 +38,9 @@ const App: FC = () => {
           <Route path="/login" element={<Login />} />
           <Route path="/userSignUp" element={<UserSignUp />} />
           <Route path="/partnerSignUp" element={<PartnerSignUp />} />
+          <Route path="/loginAdmin" element={<SignInAdmin />} />
+          <Route path="/admin_dashboard" element={<DashboardContent />} />
+          <Route path="/partner_requests" element={<PartnerRequests />} />
         </Routes>
       </RecoilRoot>
     </>

@@ -1,8 +1,9 @@
-import React, { FC } from "react";
+import React, { FC, useState } from "react";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import { useNavigate } from "react-router-dom";
+import CircularProgress from "@mui/material/CircularProgress";
 import TextField from "@mui/material/TextField";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
@@ -41,10 +42,12 @@ const Copyright: FC<copyrightProps> = ({ sx, ...props }) => {
 const theme = createTheme();
 
 export const Login: FC = () => {
+  const [loading, setLoading] = useState(false);
   const [userLogged, setUserLogged] = useRecoilState(userLoggedState);
   const navigate = useNavigate();
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    setLoading(true);
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     // eslint-disable-next-line no-console
@@ -58,10 +61,37 @@ export const Login: FC = () => {
       if (res.status === 200) {
         const { data } = res;
         const { token, user } = data;
-        const { email, login } = user;
-        setUserLogged({ ...userLogged, token, email, login });
+        const {
+          email,
+          login,
+          cpf,
+          telefone,
+          parceiro_id,
+          beneficio_id,
+          tipo_usuario_id,
+          nome,
+          endereco_id,
+          num_registro,
+        } = user;
+        setUserLogged({
+          ...userLogged,
+          token,
+          email,
+          login,
+          cpf,
+          endereco_id,
+          nome,
+          num_registro,
+          telefone,
+          parceiro_id,
+          beneficio_id,
+          tipo_usuario_id,
+        });
         api.defaults.headers.common["authorization"] = token;
-        navigate("/");
+        setLoading(false);
+        if (tipo_usuario_id === 2) {
+          navigate("/");
+        }
       }
       console.log("GG RES", res);
     }
@@ -134,14 +164,18 @@ export const Login: FC = () => {
                 control={<Checkbox value="remember" color="primary" />}
                 label="Lembrar-me"
               />
-              <Button
-                type="submit"
-                fullWidth
-                variant="contained"
-                sx={{ mt: 3, mb: 2 }}
-              >
-                Login
-              </Button>
+              {loading ? (
+                <CircularProgress />
+              ) : (
+                <Button
+                  type="submit"
+                  fullWidth
+                  variant="contained"
+                  sx={{ mt: 3, mb: 2 }}
+                >
+                  Login
+                </Button>
+              )}
               <Grid container>
                 <Grid item xs>
                   <Link href="#" variant="body2">

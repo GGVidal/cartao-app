@@ -10,6 +10,9 @@ import StarIcon from "@mui/icons-material/StarBorder";
 import Typography from "@mui/material/Typography";
 import Link from "@mui/material/Link";
 import Container from "@mui/material/Container";
+import { useRecoilValue } from "recoil";
+import { userLoggedState } from "../recoilAtoms/atoms";
+import { useNavigate } from "react-router-dom";
 
 interface copyrightProps {
   sx: any;
@@ -36,39 +39,39 @@ const Copyright: FC<copyrightProps> = ({ sx: any, ...props }) => {
 const tiers = [
   {
     title: "Bronze",
-    price: "0",
+    price: "39,90",
     description: [
       "10 users included",
       "2 GB of storage",
       "Help center access",
       "Email support",
     ],
-    buttonText: "Sign up for free",
+    buttonText: "Selecionar",
     buttonVariant: "outlined",
   },
   {
-    title: "Prata",
+    title: "Ouro",
     subheader: "Most popular",
-    price: "15",
+    price: "99,90",
     description: [
       "20 users included",
       "10 GB of storage",
       "Help center access",
       "Priority email support",
     ],
-    buttonText: "Get started",
+    buttonText: "Selecionar",
     buttonVariant: "contained",
   },
   {
-    title: "Ouro",
-    price: "30",
+    title: "Prata",
+    price: "69,90",
     description: [
       "50 users included",
       "30 GB of storage",
       "Help center access",
       "Phone & email support",
     ],
-    buttonText: "Contact us",
+    buttonText: "Selecionar",
     buttonVariant: "outlined",
   },
 ];
@@ -93,6 +96,15 @@ const footers = [
 ];
 
 const CardRewards: FC = () => {
+  const loggedUser = useRecoilValue(userLoggedState);
+  const navigate = useNavigate();
+  const onSelectReward = (reward: any) => {
+    if (loggedUser.token) {
+      console.log(reward, loggedUser);
+    } else {
+      navigate("/login");
+    }
+  };
   return (
     <React.Fragment>
       <Container
@@ -129,7 +141,7 @@ const CardRewards: FC = () => {
               item
               key={tier.title}
               xs={12}
-              sm={tier.title === "Enterprise" ? 12 : 6}
+              sm={tier.title === "Ouro" ? 12 : 6}
               md={4}
             >
               <Card>
@@ -162,10 +174,10 @@ const CardRewards: FC = () => {
                       variant="h3"
                       color="text.primary"
                     >
-                      ${tier.price}
+                      R${tier.price}
                     </Typography>
                     <Typography variant="h6" color="text.secondary">
-                      /mo
+                      /ano
                     </Typography>
                   </Box>
                   <ul>
@@ -183,6 +195,7 @@ const CardRewards: FC = () => {
                 </CardContent>
                 <CardActions>
                   <Button
+                    onClick={() => onSelectReward(tier)}
                     fullWidth
                     variant={tier.buttonVariant as "outlined" | "contained"}
                   >
